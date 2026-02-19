@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resumo Pós-Aula — Lorena — CZK English</title>
+
+  <style>
+    :root{
+      --page-bg: #f4f7fa;
+      --card-bg: #fff;
+      --accent: #2f86e6;
+      --accent-dark: #1f6fd1;
+      --green: #36b37e;
+      --muted: #6b7280;
+      --border: #e6eef8;
+      --box-radius: 12px;
+      --card-width: 720px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      background:var(--page-bg);
+      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:48px 20px;
+    }
+
+    .card{
+      width:100%;
+      max-width:var(--card-width);
+      background:var(--card-bg);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 6px 22px rgba(33,47,60,0.06);
+      border:1px solid rgba(15,33,64,0.03);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:8px;
+    }
+
+    .badge{
+      background:linear-gradient(180deg,#fff,#f2fbff);
+      border:1px solid var(--border);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--accent);
+      font-weight:700;
+      font-size:0.85rem;
+    }
+
+    h1{
+      margin:0;
+      font-size:1.3rem;
+      color:#0f1724;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.92rem;
+      margin-top:6px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 14px rgba(47,134,230,0.12);
+    }
+
+    .btn.secondary{
+      background:#fff;
+      color:var(--accent);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+
+    main{margin-top:18px;}
+    section{margin-top:18px;}
+
+    .panel{
+      background:#fbfdff;
+      border-radius:12px;
+      padding:16px;
+      border:1px solid var(--border);
+    }
+
+    .outline-card{
+      border-radius:10px;
+      border:1px solid var(--border);
+      padding:16px;
+      background:#fff;
+    }
+
+    /* Vocabulary boxes */
+    .vocab-grid{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .vocab{
+      flex:1;
+      min-width:220px;
+      border-radius:10px;
+      padding:14px;
+      border:2px solid #dfeefe;
+      background:#fff;
+    }
+
+    .vocab.green{
+      border-color:#c9f3dc;
+      background:#f5fff6;
+    }
+
+    .vocab h3{
+      margin:0;
+      font-size:1rem;
+      color:#154360;
+    }
+
+    .vocab p{
+      margin:8px 0 0 0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    /* Transcrição / gravação buttons */
+    .media-row{
+      display:flex;
+      gap:14px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .media-btn{
+      background:#fff;
+      border:1px solid var(--border);
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:700;
+      color:var(--accent);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-width:200px;
+      justify-content:center;
+    }
+
+    /* Homework box */
+    .homework{
+      background:#f3fff6;
+      border:1px solid #d7f5df;
+      border-radius:10px;
+      padding:14px;
+      margin-top:10px;
+    }
+
+    /* ===== TALK TIME – TABELA RETANGULAR ===== */
+    .speaking{
+      margin-top:18px;
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border:1px solid var(--border);
+      max-width:640px;
+    }
+
+    .speaking h2{
+      margin:0 0 10px 0;
+      font-size:1.05rem;
+      color:#0f1724;
+    }
+
+    .talk-table{
+      width:100%;
+      border-collapse:collapse;
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid #e1e9f5;
+      font-size:0.9rem;
+    }
+
+    .talk-table th,
+    .talk-table td{
+      padding:8px 10px;
+      text-align:left;
+    }
+
+    .talk-table th{
+      background:#eef4ff;
+      color:#1b3556;
+      font-weight:700;
+      border-bottom:1px solid #dde6fa;
+    }
+
+    .row-teacher{
+      background:#e7f2ff; /* azul clarinho */
+    }
+
+    .row-student{
+      background:#e8f7ef; /* verde clarinho */
+    }
+
+    .talk-label{
+      font-weight:700;
+    }
+
+    .talk-percent{
+      font-weight:700;
+      color:#0f1724;
+    }
+
+    .talk-time{
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+      text-align:center;
+    }
+
+    /* responsive */
+    @media (max-width:720px){
+      .card{padding:18px;border-radius:14px;}
+      .vocab-grid{flex-direction:column;}
+      .media-row{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="card" role="main">
+      <header>
+        <div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span class="badge">PÓS-AULA</span>
+            <h1>Revisão — Profissões, demonstrativos e verbo to be</h1>
+          </div>
+          <div class="meta" style="margin-top:8px;">
+            <strong>Professor:</strong> César &nbsp;•&nbsp;
+            <strong>Aluno:</strong> Lorena &nbsp;•&nbsp;
+            <strong>Data:</strong> 19/02/2026
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="#" onclick="window.print();return false;">Imprimir / Salvar PDF</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel">
+          <p style="margin:0;font-weight:600;color:#08325a;">
+            Revisão geral do conteúdo: occupations, this/these, vocabulário de apresentação (citizen/birthplace/hometown), verbo <strong>to be</strong> e short answers.
+          </p>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Resumo da Aula</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 8px 0;">
+              Hoje fizemos uma <strong>revisão completa</strong> do que já foi estudado, sem caderno, focando em usar o inglês na prática. Começamos com <strong>occupations</strong> (profissões), descrevendo imagens e formando frases simples como <em>She is a lawyer</em> e <em>He is a tour guide</em>. Reforçamos nomes comuns de trabalho e fizemos ajustes importantes de vocabulário (por exemplo, <em>electrician</em> em vez de “electron”, e <em>accountant</em> quando a ideia era “trabalha com números”).
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Depois revisamos os demonstrativos <strong>this</strong> (singular) e <strong>these</strong> (plural), conectando isso a perguntas sobre pessoas e fotos. Aqui você praticou a troca correta de singular para plural em perguntas com <em>they</em>, como <em>What are their names?</em> e reforçamos a regra: <strong>nunca</strong> existe “they is”, sempre <em>they are</em>.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Na sequência, voltamos ao vocabulário de <strong>apresentação pessoal</strong> e identidade: <em>citizen</em> (cidadão), <em>birthplace</em> (onde nasceu), <em>hometown</em> (onde cresceu/“de onde é”), <em>nationality</em> (nacionalidade), <em>native language</em> (língua nativa), além de <em>marital status</em> (estado civil) e <em>passport</em> (passaporte). Também revisamos a ideia de abreviação com <strong>for short</strong> (ex.: <em>My name is Lorena, Low for short.</em>).
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Finalizamos com <strong>pronouns + verbo to be</strong> e <strong>short answers</strong>, treinando respostas padrão como <em>Yes, she is.</em> / <em>No, they aren’t.</em> e lembrando as combinações: <em>I am</em>, <em>he/she/it is</em>, <em>you/we/they are</em>. Também reforçamos contrações corretas (ex.: <em>I’m not</em>, e não “I’mn’t”) e um ponto de gramática: não abreviar o verbo antes do ponto final em respostas como <em>Yes, she is.</em>
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Key Vocabulary</h2>
+          <div class="vocab-grid">
+            <div class="vocab">
+              <h3>For short</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) “abreviação”, “para encurtar”</em><br>
+                <small>My name is Lorena, Low for short.</small>
+              </p>
+            </div>
+            <div class="vocab green">
+              <h3>Short answers</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) respostas curtas (com pronome + to be)</em><br>
+                <small>Are they Peruvian? No, they aren’t.</small>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- NOVOS TÓPICOS: VOCABULÁRIO DA AULA, FRASES MODELO, CORREÇÕES -->
+        <section>
+          <h2 style="margin-bottom:8px;">Vocabulário da aula</h2>
+          <div class="outline-card">
+            <h3 style="margin-top:0;">Occupations (profissões)</h3>
+            <ul>
+              <li><strong>electrician</strong> – eletricista</li>
+              <li><strong>nurse</strong> – enfermeira(o)</li>
+              <li><strong>lawyer</strong> – advogado(a)</li>
+              <li><strong>mechanic</strong> – mecânico(a)</li>
+              <li><strong>secretary</strong> – secretária(o)</li>
+              <li><strong>administrative assistant</strong> – assistente administrativo(a)</li>
+              <li><strong>salesperson</strong> – vendedor(a)</li>
+              <li><strong>architect</strong> – arquiteto(a)</li>
+              <li><strong>tour guide</strong> – guia de turismo</li>
+              <li><strong>accountant</strong> – contador(a)</li>
+              <li><strong>math teacher</strong> – professor(a) de matemática</li>
+            </ul>
+
+            <h3>Identity &amp; personal info (apresentação)</h3>
+            <ul>
+              <li><strong>citizen</strong> – cidadão(ã)</li>
+              <li><strong>nationality</strong> – nacionalidade</li>
+              <li><strong>birthplace</strong> – local de nascimento</li>
+              <li><strong>hometown</strong> – cidade de onde você é (onde cresceu)</li>
+              <li><strong>native language</strong> – língua nativa</li>
+              <li><strong>passport</strong> – passaporte</li>
+              <li><strong>marital status</strong> – estado civil</li>
+              <li><strong>single</strong> – solteiro(a)</li>
+              <li><strong>married</strong> – casado(a)</li>
+            </ul>
+
+            <h3>Grammar &amp; useful words</h3>
+            <ul>
+              <li><strong>this</strong> – este/esta (singular)</li>
+              <li><strong>these</strong> – estes/estas (plural)</li>
+              <li><strong>same here</strong> – eu também / comigo também</li>
+              <li><strong>early</strong> – adiantado(a), cedo (oposto de <em>late</em>)</li>
+              <li><strong>Peruvian</strong> – peruano(a)</li>
+              <li><strong>Ecuadorian</strong> – equatoriano(a)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Frases modelo da aula</h2>
+          <div class="outline-card">
+            <ul>
+              <li>My name is Lorena, Low for short.</li>
+              <li>Stephanie knows the law. She is a lawyer.</li>
+              <li>They are architects.</li>
+              <li>She works in an office. She is an administrative assistant.</li>
+              <li>He loves working with tourists. He is a tour guide.</li>
+              <li>This is a great photo. Who are they?</li>
+              <li>They are my best friends.</li>
+              <li>What are their names?</li>
+              <li>They are from Mexico.</li>
+              <li>What is my marital status?</li>
+              <li>Are we early? Yes, we are.</li>
+              <li>Is Maria from Mexico? Yes, she is.</li>
+              <li>Are Linda and Mike single? No, they aren’t.</li>
+              <li>Are they Peruvian? No, they aren’t. They are Ecuadorian.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ✅ NOVA SEÇÃO FIXA: CORREÇÕES IMPORTANTES -->
+        <section>
+          <h2 style="margin-bottom:8px;">Correções importantes</h2>
+          <div class="outline-card">
+            <ul>
+              <li><strong>Profissão (vocabulário):</strong> <span style="font-family:monospace;">I am electron.</span> ❌ → <span style="font-family:monospace;">I am an electrician.</span> ✅</li>
+              <li><strong>Plural em perguntas com “they”:</strong> <span style="font-family:monospace;">What is their name?</span> ❌ → <span style="font-family:monospace;">What are their names?</span> ✅</li>
+              <li><strong>Verbo to be com “they”:</strong> <span style="font-family:monospace;">they is</span> ❌ → <span style="font-family:monospace;">they are</span> ✅</li>
+              <li><strong>Short answers (evitar frase longa):</strong> <span style="font-family:monospace;">No, they are studying.</span> ❌ → <span style="font-family:monospace;">No, they aren’t.</span> ✅</li>
+              <li><strong>Contração correta:</strong> não existe abreviação de <span style="font-family:monospace;">am not</span> como uma palavra única. Use <span style="font-family:monospace;">I’m not</span> ✅</li>
+              <li><strong>Padrão de resposta curta:</strong> use <span style="font-family:monospace;">Yes, it is.</span> / <span style="font-family:monospace;">No, it isn’t.</span> (pronome + <em>to be</em>), sem repetir a frase inteira.</li>
+              <li><strong>Abreviação antes do ponto final:</strong> em respostas como <span style="font-family:monospace;">Yes, she is.</span> ✅ mantenha o verbo completo (não abreviar no final).</li>
+              <li><strong>Pronome + to be (regra rápida):</strong> <span style="font-family:monospace;">I am</span> / <span style="font-family:monospace;">he/she/it is</span> / <span style="font-family:monospace;">you/we/they are</span>.</li>
+            </ul>
+          </div>
+        </section>
+        <!-- ✅ FIM DA NOVA SEÇÃO -->
+
+        <section>
+          <h2 style="margin-bottom:8px;">Transcrição &amp; Gravação</h2>
+          <div class="media-row">
+            <!-- Transcrição sem link (apenas botão) -->
+            <a class="media-btn" href="#" role="button">📄 Acessar transcrição</a>
+
+            <!-- Vídeo da aula com o link que você mandou -->
+            <a
+              class="media-btn"
+              href="https://youtu.be/DsLa9WwmTVQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="button"
+              style="background:linear-gradient(180deg,#1f6fd1,#2f86e6);color:#fff;border:none;min-width:260px;"
+            >
+              🎥 Assistir gravação (acesso privado)
+            </a>
+          </div>
+        </section>
+
+        <!-- ===== TABELA DE DISTRIBUIÇÃO DE FALA ===== -->
+        <section class="speaking" aria-label="Distribuição de fala">
+          <h2>Tempo de Fala (Talk Time)</h2>
+          <table class="talk-table">
+            <thead>
+              <tr>
+                <th>Quem falou</th>
+                <th>Porcentagem</th>
+                <th>Duração aproximada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-teacher">
+                <td><span class="talk-label">César (Professor)</span></td>
+                <td><span class="talk-percent">68%</span></td>
+                <td class="talk-time">~34 minutos</td>
+              </tr>
+              <tr class="row-student">
+                <td><span class="talk-label">Lorena</span></td>
+                <td><span class="talk-percent">32%</span></td>
+                <td class="talk-time">~16 minutos</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <!-- ===== FIM TABELA ===== -->
+
+        <section>
+          <h2 style="margin-bottom:8px;">Homework</h2>
+          <div class="homework">
+            <p style="margin:0 0 8px 0;">
+              📌 <strong>Lição de casa (como combinado em aula):</strong>
+            </p>
+            <ul style="margin:0 0 6px 18px;padding:0;font-size:0.94rem;color:var(--muted);">
+              <li>Ler o pós-aula de <strong>2 a 3x</strong> na semana.</li>
+            </ul>
+            <p style="margin:6px 0 0 0;">
+              <!-- Botão de tarefa de casa com link do Babadum -->
+              <a
+                href="https://babadum.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn secondary"
+                style="padding:8px 12px;border-radius:8px;font-weight:700;"
+              >
+                🎮 Abrir tarefa de casa (Babadum)
+              </a>
+            </p>
+          </div>
+
+          <div style="margin-top:14px;">
+            <a class="btn" href="https://wa.me" style="background:#25D366;border-radius:10px;box-shadow:none;">
+              💬 Falar comigo no WhatsApp
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <footer>
+        <p style="margin:18px 0 0 0;color:var(--muted);font-size:0.9rem;">
+          © 2025 CZK English • Este conteúdo é exclusivo para fins educacionais. • Suporte: czkenglish@gmail.com
+        </p>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
